@@ -1,9 +1,9 @@
 [Desktop Entry]
 Name=App
 GenericName=App
-Comment=Its an App
+Comment=Project Management Application
 Categories=Utility
-Exec=com.github.jorgemanzo.app
+Exec=com.github.oceanboard.app
 Icon=application-defult-Icon
 Terminal=false
 Type=application
