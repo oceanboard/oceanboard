@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=App
+GenericName=App
+Comment=Its an App
+Categories=Utility
+Exec=com.github.jorgemanzo.app
+Icon=application-defult-Icon
+Terminal=false
+Type=application
+Keywords=App
