@@ -11,13 +11,17 @@ public class App: Gtk.Application  {
         );
     }
 
-    protected override void activate () {
+    protected override void activate() {
         grid = new Gtk.Grid ();
         grid.orientation = Gtk.Orientation.VERTICAL;
         grid.margin_start = 10;
         grid.margin_top = 10;
         grid.row_spacing = 10;
         grid.column_spacing = 4;
+
+        var header = new HeaderBar();
+
+        grid.attach(header, 0, 0, 900, 3);
 
         var column = new Gtk.ListBox();
         column.set_selection_mode(Gtk.SelectionMode.NONE);
@@ -32,7 +36,7 @@ public class App: Gtk.Application  {
         testBox2.pack_start(label2, true, true, 0);
         column.add(testBox2);
 
-        grid.attach(column, 0, 0, 10, 10);
+        grid.attach(column, 0, 1, 10, 10);
 
         var css_provider = new Gtk.CssProvider ();
         try{ 
