@@ -13,14 +13,6 @@ public class ScrollableColumnsView : Gtk.ScrolledWindow {
         add(columns);
     }
 
-    // Creates a new column and adds it to the window,
-    // and returns the created column.
-    public Gtk.ListBox new_column() {
-        var col = new Gtk.ListBox();
-        columns.pack_start(col);
-        return col;
-    }
-
     // Creates a new column and adds it to the window
     // with a label
     public Gtk.ListBox new_column_with_label(string label) {

@@ -19,33 +19,16 @@ public class App: Gtk.Application  {
         view = new ScrollableColumnsView();
         columns = new Gee.HashMap<string, Gtk.ListBox>();
 
-        var col1 = "Column 1";
-        var col2 = "Column 2";
-        var col3 = "Column 3";
-        var col4 = "Column 4";
-
-        var long_text = "loooooooooooooooooooooooooooong text";
+        var col1 = "My Column";
+        var col2 = "My Second Column";
 
         // Make some columns
-        columns.set(col1, view.new_column());
-        columns.set(col2, view.new_column());
+        columns.set(col1, view.new_column_with_label(col1));
+        columns.set(col2, view.new_column_with_label(col2));
 
-        // These are more special in that they have a frame around each col
-        columns.set(col3, view.new_column_with_label(col3));
-        columns.set(col4, view.new_column_with_label(col4));
-
-        // Add items to every column
-        columns.get(col1).add(new Gtk.Label(long_text));
-        columns.get(col2).add(new Gtk.Label(long_text));
-        columns.get(col3).add(new Gtk.Label(long_text));
-        columns.get(col3).add(new Gtk.Label(long_text));
-        columns.get(col3).add(new Gtk.Label(long_text));
-        columns.get(col3).add(new Gtk.Label(long_text));
-        columns.get(col4).add(new Gtk.Label(long_text));
-        columns.get(col4).add(new Gtk.Label(long_text));
-        columns.get(col4).add(new Gtk.Label(long_text));
-        columns.get(col4).add(new Gtk.Label(long_text));
-        columns.get(col4).add(new Gtk.Label(long_text));
+        // Add some items
+        columns.get(col1).add(new Gtk.Label("Column 1 item"));
+        columns.get(col2).add(new Gtk.Label("Column 2 item"));
 
         var main_window = new Gtk.ApplicationWindow (this);
         main_window.default_height = 600;
