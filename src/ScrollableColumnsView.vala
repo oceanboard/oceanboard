@@ -1,20 +1,22 @@
 public class ScrollableColumnsView : Gtk.ScrolledWindow {
+
+    // Using Gtk.Box lets us easily add items to it, and
+    // they will placed as columns horizontally
     private Gtk.Box columns;
     construct {
+        // 50 px of spacing between each column
         columns = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 50);
+
+        // Add the Gtk.Box to the Gtk.ScrolledWindow to
+        // give us H-scrolling
         add(columns);
     }
 
-    public void add_label(string label) {
-        columns.pack_start(new Gtk.Label(label));
-    }
-
-    public void add_column_with_label(string label) {
+    // Creates a new column and adds it to the window,
+    // and returns the created column.
+    public Gtk.ListBox new_column() {
         var col = new Gtk.ListBox();
-        col.add(new Gtk.Label(label));
         columns.pack_start(col);
-    }
-    public Gtk.Box get_columns() {
-        return columns;
+        return col;
     }
 }
