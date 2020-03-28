@@ -29,19 +29,28 @@ public class App: Gtk.Application  {
         // Make some columns
         columns.set(col1, view.new_column());
         columns.set(col2, view.new_column());
-        columns.set(col3, view.new_column());
-        columns.set(col4, view.new_column());
+
+        // These are more special in that they have a frame around each col
+        columns.set(col3, view.new_column_with_label(col3));
+        columns.set(col4, view.new_column_with_label(col4));
 
         // Add items to every column
         columns.get(col1).add(new Gtk.Label(long_text));
         columns.get(col2).add(new Gtk.Label(long_text));
         columns.get(col3).add(new Gtk.Label(long_text));
+        columns.get(col3).add(new Gtk.Label(long_text));
+        columns.get(col3).add(new Gtk.Label(long_text));
+        columns.get(col3).add(new Gtk.Label(long_text));
+        columns.get(col4).add(new Gtk.Label(long_text));
+        columns.get(col4).add(new Gtk.Label(long_text));
+        columns.get(col4).add(new Gtk.Label(long_text));
+        columns.get(col4).add(new Gtk.Label(long_text));
         columns.get(col4).add(new Gtk.Label(long_text));
 
         var main_window = new Gtk.ApplicationWindow (this);
         main_window.default_height = 600;
         main_window.default_width = 900;
-        main_window.resizable = false;
+        main_window.resizable = true;
         main_window.title = "Oceanboard";
         main_window.add (view);
         main_window.show_all ();
