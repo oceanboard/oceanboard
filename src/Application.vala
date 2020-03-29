@@ -7,8 +7,6 @@ public class App: Gtk.Application  {
     // This object wraps around scrolled window and gives us
     // a way to add columns.
     ScrollableColumnsView view;
-    // This is the header of the application.
-    HeaderBar headerBarComponent;
 
     public App () {
         Object (
@@ -19,7 +17,9 @@ public class App: Gtk.Application  {
 
     protected override void activate() {
 
-        headerBarComponent = new HeaderBar();
+        var main_window = new MainWindow (this);
+        main_window.resizable = true;
+        main_window.title = "Oceanboard";
         
         view = new ScrollableColumnsView();
         columns = new Gee.HashMap<string, Gtk.ListBox>();
@@ -35,16 +35,8 @@ public class App: Gtk.Application  {
         columns.get(col1).add(new Gtk.Label("Column 1 item"));
         columns.get(col2).add(new Gtk.Label("Column 2 item"));
 
-        var main_window = new Gtk.ApplicationWindow (this);
-        main_window.default_height = 600;
-        main_window.default_width = 900;
-        main_window.resizable = true;
-        main_window.title = "Oceanboard";
-        main_window.add (headerBarComponent);
         main_window.add (view);
         main_window.show_all ();
-
-        
         
     }
 
