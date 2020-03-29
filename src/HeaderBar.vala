@@ -1,6 +1,7 @@
 
 public class HeaderBar : Gtk.HeaderBar {
 
+    // Static names for menu options
     public const string ACTION_NEW = "New";
     public const string ACTION_EDIT = "Edit";
 
