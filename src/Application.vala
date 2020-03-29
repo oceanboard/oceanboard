@@ -1,9 +1,15 @@
 
 public class App: Gtk.Application  {
-    private Gtk.SearchEntry search_entry { get; set; }
-    private Gtk.Grid grid { get; set; }
-    private Gtk.Label current_temp { get; set; }
-    
+
+    // So we have access to and labels for each column
+    Gee.HashMap<string, Gtk.ListBox> columns;
+
+    // This object wraps around scrolled window and gives us
+    // a way to add columns.
+    ScrollableColumnsView view;
+    // This is the header of the application.
+    HeaderBar headerBarComponent;
+
     public App () {
         Object (
             application_id: "com.github.oceanboard.app",
@@ -12,47 +18,34 @@ public class App: Gtk.Application  {
     }
 
     protected override void activate() {
-        grid = new Gtk.Grid ();
-        grid.orientation = Gtk.Orientation.VERTICAL;
-        grid.margin_start = 10;
-        grid.margin_top = 10;
-        grid.row_spacing = 10;
-        grid.column_spacing = 4;
 
-        var header = new HeaderBar();
-
-        grid.attach(header, 0, 0, 900, 3);
-
-        var column = new Gtk.ListBox();
-        column.set_selection_mode(Gtk.SelectionMode.NONE);
+        headerBarComponent = new HeaderBar();
         
-        var testBox1 = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 10);
-        var label1 = new Gtk.Label("Test Box 1");
-        testBox1.pack_start(label1, true, true, 0);
-        column.add(testBox1);
+        view = new ScrollableColumnsView();
+        columns = new Gee.HashMap<string, Gtk.ListBox>();
 
-        var testBox2 = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 10);
-        var label2 = new Gtk.Label("Test Box 2");
-        testBox2.pack_start(label2, true, true, 0);
-        column.add(testBox2);
+        var col1 = "My Column";
+        var col2 = "My Second Column";
 
-        grid.attach(column, 0, 1, 10, 10);
+        // Make some columns
+        columns.set(col1, view.new_column_with_label(col1));
+        columns.set(col2, view.new_column_with_label(col2));
 
-        var css_provider = new Gtk.CssProvider ();
-        try{ 
-            css_provider.load_from_path ("../style.css"); 
-        } catch (Error e) {
-            print ("Something bad happened: %s\n", e.message);
-        }
+        // Add some items
+        columns.get(col1).add(new Gtk.Label("Column 1 item"));
+        columns.get(col2).add(new Gtk.Label("Column 2 item"));
 
         var main_window = new Gtk.ApplicationWindow (this);
-        Gtk.StyleContext.add_provider_for_screen (main_window.get_screen (), css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
         main_window.default_height = 600;
         main_window.default_width = 900;
-        main_window.resizable = false;
+        main_window.resizable = true;
         main_window.title = "Oceanboard";
-        main_window.add (grid);
+        main_window.add (headerBarComponent);
+        main_window.add (view);
         main_window.show_all ();
+
+        
+        
     }
 
     public static int main (string[] args) {
