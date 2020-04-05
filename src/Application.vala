@@ -21,6 +21,18 @@ public class App: Gtk.Application  {
 
         var col1 = "My Column";
         var col2 = "My Second Column";
+        var multiLineText = "
+        \tMulti Line Text!\n
+        Here is some multi-line text:\n
+        1. aa\n
+        2. aaA\n
+        3. AAAA\n
+        ";
+        var card = new Card.withContent(multiLineText);
+        var card2 = new Card.withContent(multiLineText);
+        var card3 = new Card.withContent(multiLineText);
+
+
 
         // Make some columns
         columns.set(col1, view.new_column_with_label(col1));
@@ -29,12 +41,19 @@ public class App: Gtk.Application  {
         // Add some items
         columns.get(col1).add(new Gtk.Label("Column 1 item"));
         columns.get(col2).add(new Gtk.Label("Column 2 item"));
+        columns.get(col2).add(card2);
+        columns.get(col2).add(card3);
+
+
+        columns.get(col1).add(card);
+        columns.get(col1).add(new Gtk.Label("Column 1 item 2"));
+
 
         var main_window = new Gtk.ApplicationWindow (this);
         main_window.default_height = 600;
         main_window.default_width = 900;
         main_window.resizable = true;
-        main_window.title = "Oceanboard";
+        main_window.title = "Otterboi";
         main_window.add (view);
         main_window.show_all ();
     }
